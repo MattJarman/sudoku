@@ -3,16 +3,20 @@ import { createBoard, solve } from 'sudoku'
 import { classNames } from '../../lib/utils'
 
 interface BoardProps {
-  board: string
+  sudoku: string
 }
 
-const Board = ({ board }: BoardProps) => {
-  const grid = createBoard(board)
-  const [solved, solvedBoard] = solve(grid)
+const Board = ({ sudoku }: BoardProps) => {
+  const board = createBoard(sudoku)
+  const [solved, solvedBoard] = solve(board)
+
+  if (!solved) {
+    return <p>Failed to solve provided Sudoku!</p>
+  }
 
   return (
     <table>
-      <tbody className="border-4 border-black">
+      <tbody className="shadow-md rounded-md">
         {solvedBoard.map((row, rowIndex) => (
           <tr key={`row-${rowIndex}`}>
             {row.map((value, cellIndex) => (
@@ -20,11 +24,11 @@ const Board = ({ board }: BoardProps) => {
                 className={classNames(
                   cellIndex > 0 ? 'border-l border-gray-200' : '',
                   rowIndex > 0 ? 'border-t border-gray-200' : '',
-                  'px-2'
+                  'w-16 h-16 text-center',
                 )}
                 key={`cell-${rowIndex}-${cellIndex}`}
               >
-                <Cell className="text-2xl" value={value} />
+                <Cell className="cursor-pointer text-3xl text-blue-500" value={value} />
               </td>
             ))}
           </tr>
