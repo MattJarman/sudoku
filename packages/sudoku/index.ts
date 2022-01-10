@@ -1,7 +1,9 @@
 const SUDOKU_BOARD_LENGTH = 9
 const SUDOKU_GRID_LENGTH = 3
 
-export const solve = (board: number[][]): Array<boolean | number[][]> => {
+export type Solution = [boolean, number[][]]
+
+export const solve = (board: number[][]): Solution => {
   const empty = findEmpty(board)
   if (!empty) {
     return [true, board]
@@ -61,7 +63,7 @@ export const isValid = (
   return true
 }
 
-const findEmpty = (board: number[][]): number[] | boolean => {
+const findEmpty = (board: number[][]): number[] | false => {
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
       if (board[i][j] === 0) {
