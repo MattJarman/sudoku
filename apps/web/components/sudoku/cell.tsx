@@ -7,7 +7,7 @@ interface CellProps {
 const Cell = ({ value, className }: CellProps) => {
   // const [number, setNumber] = useState(value)
 
-  return <div className={className}>{value}</div>
+  return <div className={className}>{value === 0 ? '' : value}</div>
 }
 
 export default Cell

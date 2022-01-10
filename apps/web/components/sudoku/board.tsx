@@ -16,19 +16,22 @@ const Board = ({ sudoku }: BoardProps) => {
 
   return (
     <table>
-      <tbody className="shadow-md rounded-md">
+      <tbody className="shadow-md border-4 border-gray-200">
         {solvedBoard.map((row, rowIndex) => (
           <tr key={`row-${rowIndex}`}>
             {row.map((value, cellIndex) => (
               <td
                 className={classNames(
-                  cellIndex > 0 ? 'border-l border-gray-200' : '',
-                  rowIndex > 0 ? 'border-t border-gray-200' : '',
-                  'w-16 h-16 text-center',
+                  rowIndex % 3 === 0 ? 'border-t-4' : '',
+                  cellIndex % 3 === 0 ? 'border-l-4' : '',
+                  'w-16 h-16 text-center border'
                 )}
                 key={`cell-${rowIndex}-${cellIndex}`}
               >
-                <Cell className="cursor-pointer text-3xl text-blue-500" value={value} />
+                <Cell
+                  className="w-full h-full flex items-center justify-center cursor-pointer text-3xl text-blue-500"
+                  value={value}
+                />
               </td>
             ))}
           </tr>
