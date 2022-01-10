@@ -1,6 +1,4 @@
-# Turborepo starter with NPM
-
-This is an official starter turborepo.
+# Sudoku 
 
 ## What's inside?
 
@@ -8,11 +6,10 @@ This turborepo uses [NPM](https://www.npmjs.com/) as a package manager. It inclu
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org) app
 - `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
 - `config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `sudoku`: A sudoku solver package
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
