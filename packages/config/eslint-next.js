@@ -21,7 +21,7 @@ module.exports = {
     'prettier'
   ],
   rules: {
-    'comma-dangle': ['never'],
+    'comma-dangle': ['error'],
     'prettier/prettier': ['error']
   }
 }
