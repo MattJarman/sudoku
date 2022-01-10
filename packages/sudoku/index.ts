@@ -3,29 +3,6 @@ const SUDOKU_GRID_LENGTH = 3
 
 export type Solution = [boolean, number[][]]
 
-export const solve = (board: number[][]): Solution => {
-  const empty = findEmpty(board)
-  if (!empty) {
-    return [true, board]
-  }
-
-  const [row, column] = empty
-  for (let i = 1; i <= board.length; i++) {
-    if (isValid(board, row, column, i)) {
-      board[row][column] = i
-
-      const [solved] = solve(board)
-      if (solved) {
-        return [true, board]
-      }
-
-      board[row][column] = 0
-    }
-  }
-
-  return [false, board]
-}
-
 export const createBoard = (sudokuString: string): number[][] => {
   const board = Array.from(new Array(SUDOKU_BOARD_LENGTH), () => [])
   const rows = sudokuString.split('')
@@ -61,6 +38,42 @@ export const isValid = (
   }
 
   return true
+}
+
+/**
+ * We need to clone the board as we don't want to alter
+ * the board that the user passes in. Only after cloning
+ * can we recursively solve the sudoku.
+ *
+ * @param board number[][]
+ * @returns Solution
+ */
+export const solve = (board: number[][]): Solution => {
+  const cloned = JSON.parse(JSON.stringify(board))
+  return solveSudoku(cloned)
+}
+
+const solveSudoku = (board: number[][]): Solution => {
+  const empty = findEmpty(board)
+  if (!empty) {
+    return [true, board]
+  }
+
+  const [row, column] = empty
+  for (let i = 1; i <= board.length; i++) {
+    if (isValid(board, row, column, i)) {
+      board[row][column] = i
+
+      const [solved, solvedBoard] = solve(board)
+      if (solved) {
+        return [true, solvedBoard]
+      }
+
+      board[row][column] = 0
+    }
+  }
+
+  return [false, board]
 }
 
 const findEmpty = (board: number[][]): number[] | false => {
