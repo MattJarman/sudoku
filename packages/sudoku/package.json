@@ -5,12 +5,13 @@
     "license": "MIT",
     "scripts": {
         "test": "jest",
-        "test:coverage": "jest --coverage"
+        "test:coverage": "jest --coverage",
+        "lint": "eslint . --ext .ts"
     },
     "devDependencies": {
         "@types/jest": "^27.4.0",
         "config": "*",
-        "eslint": "7.32.0",
+        "eslint": "^7.32.0",
         "jest": "^27.4.7",
         "ts-jest": "^27.1.2",
         "tsconfig": "*",
